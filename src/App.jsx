@@ -3,7 +3,7 @@ import './index.css'
 
 // Cấu hình Telegram (Bạn cần thay đổi Token và Chat ID của mình tại đây)
 const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+const TELEGRAM_CHAT_IDS = (import.meta.env.VITE_TELEGRAM_CHAT_ID || '').split(',');
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,21 +42,26 @@ function App() {
 📝 Nội dung: ${formData.message || 'Không có'}`;
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: text
-        })
+      const sendPromises = TELEGRAM_CHAT_IDS.map(chatId => {
+        return fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId.trim(),
+            text: text
+          })
+        });
       });
 
-      if (response.ok) {
+      const responses = await Promise.all(sendPromises);
+      const isSuccess = responses.some(res => res.ok);
+
+      if (isSuccess) {
         setFormStatus({ loading: false, success: true, error: null });
         setFormData({ name: '', phone: '', service: '', message: '' });
         showPopup('Cảm ơn bạn! Yêu cầu của bạn đã được gửi đi thành công.', 'success');
       } else {
-        const errorData = await response.json();
+        const errorData = await responses[0].json();
         console.error('Telegram API Error:', errorData);
         throw new Error(errorData.description || 'Gửi yêu cầu thất bại.');
       }

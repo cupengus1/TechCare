@@ -10,6 +10,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState({ loading: false, success: false, error: null });
+  const [popup, setPopup] = useState({ show: false, message: '', type: 'success' });
 
   const [formData, setFormData] = useState({
     name: '',
@@ -17,6 +18,13 @@ function App() {
     service: '',
     message: ''
   });
+
+  const showPopup = (message, type = 'success') => {
+    setPopup({ show: true, message, type });
+    setTimeout(() => {
+      setPopup(prev => ({ ...prev, show: false }));
+    }, 3000);
+  };
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -46,7 +54,7 @@ function App() {
       if (response.ok) {
         setFormStatus({ loading: false, success: true, error: null });
         setFormData({ name: '', phone: '', service: '', message: '' });
-        alert('Cảm ơn bạn! Yêu cầu của bạn đã được gửi đi thành công.');
+        showPopup('Cảm ơn bạn! Yêu cầu của bạn đã được gửi đi thành công.', 'success');
       } else {
         const errorData = await response.json();
         console.error('Telegram API Error:', errorData);
@@ -55,7 +63,7 @@ function App() {
     } catch (error) {
       console.error('Submit Error:', error);
       setFormStatus({ loading: false, success: false, error: error.message });
-      alert(`Lỗi: ${error.message}\n(Vui lòng kiểm tra lại Token Bot hoặc Chat ID)`);
+      showPopup(`Lỗi: ${error.message}\n(Vui lòng kiểm tra lại Token Bot hoặc Chat ID)`, 'error');
     }
   };
 
@@ -464,6 +472,16 @@ function App() {
       </footer>
 
       <button className="back-to-top" id="backToTop" onClick={scrollToTop}>↑</button>
+
+      {/* Notification Popup */}
+      <div className={`notification-popup ${popup.show ? 'show' : ''} ${popup.type}`}>
+          <div className="notification-content">
+              <div className="notification-icon">
+                  {popup.type === 'success' ? '✅' : '❌'}
+              </div>
+              <p>{popup.message}</p>
+          </div>
+      </div>
     </>
   )
 }

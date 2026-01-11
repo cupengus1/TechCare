@@ -141,7 +141,6 @@ function App() {
             <ul className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`}>
                 <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')} className={`nav-link ${activeSection === 'home' ? 'active' : ''}`}>Trang Chủ</a></li>
                 <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} className={`nav-link ${activeSection === 'services' ? 'active' : ''}`}>Dịch Vụ</a></li>
-                <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')} className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}>Giới Thiệu</a></li>
                 <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}>Liên Hệ</a></li>
                 <li className="mobile-cta-li"><button className="cta-button mobile-cta" onClick={(e) => scrollToSection(e, 'contact')}>Liên Hệ Ngay</button></li>
             </ul>
@@ -294,54 +293,6 @@ function App() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="about">
-        <div className="container">
-            <div className="about-content">
-                <span className="section-badge">Về Chúng Tôi</span>
-                <h2 className="section-title">
-                    Đối Tác Công Nghệ<br />
-                    <span className="gradient-text">Đáng Tin Cậy</span>
-                </h2>
-                <p className="about-text">
-                    TechCare là đơn vị hàng đầu tại Vĩnh Long chuyên cung cấp dịch vụ
-                    kỹ thuật máy tính và giải pháp CNTT toàn diện.
-                </p>
-
-                <div className="about-features">
-                    <div className="about-feature">
-                        <div className="feature-icon">🎯</div>
-                        <div className="feature-content">
-                            <h4>Chuyên Nghiệp</h4>
-                            <p>Đội ngũ kỹ thuật viên được đào tạo bài bản</p>
-                        </div>
-                    </div>
-                    <div className="about-feature">
-                        <div className="feature-icon">⚡</div>
-                        <div className="feature-content">
-                            <h4>Nhanh Chóng</h4>
-                            <p>Thời gian phản hồi nhanh, giải quyết hiệu quả</p>
-                        </div>
-                    </div>
-                    <div class="about-feature">
-                        <div className="feature-icon">💰</div>
-                        <div className="feature-content">
-                            <h4>Giá Cả Hợp Lý</h4>
-                            <p>Chi phí minh bạch, phù hợp mọi đối tượng</p>
-                        </div>
-                    </div>
-                    <div className="about-feature">
-                        <div className="feature-icon">🛡️</div>
-                        <div className="feature-content">
-                            <h4>Bảo Hành Tốt</h4>
-                            <p>Chính sách bảo hành rõ ràng, hỗ trợ tận tình</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" className="contact">
         <div className="container">
@@ -361,10 +312,10 @@ function App() {
                             </div>
                         </div>
                         <div className="contact-method">
-                            <div className="method-icon">✉️</div>
+                            <div className="method-icon">📘</div>
                             <div className="method-content">
-                                <div className="method-label">Email</div>
-                                <div className="method-value">contact@pcsolutions.vn</div>
+                                <div className="method-label">Facebook</div>
+                                <div className="method-value"> TechCare - Hỗ Trợ Máy Tính Vĩnh Long  </div>
                             </div>
                         </div>
                         <div className="contact-method">
@@ -464,14 +415,14 @@ function App() {
                     <ul className="footer-contact">
                         <li>Zalo: 038 788 4950</li>
                         <li>Tele: 058 487 3200</li>
-                        <li>contact@techcare.com</li>
+                        <li>FB: https://fb.com/techcarevl</li>
                         <li>Vĩnh Long, Việt Nam</li>
                     </ul>
                 </div>
             </div>
 
             <div className="footer-bottom">
-                <p>&copy; 2026 TechCare. All rights reserved.</p>
+                <p>&copy; 2026 TechCare. TechCare - You tech, Our care.</p>
             </div>
         </div>
       </footer>
